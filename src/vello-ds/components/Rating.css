@@ -1,0 +1,11 @@
+/* Verbatim from `_ds_bundle.js` → components/display/Rating.jsx (RATING_CSS).
+   sm = 14px, md = 18px, lg = 22px are the system's own hardcodes. */
+.vl-rating { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-sans); }
+.vl-rating__stars { display: inline-flex; gap: 1px; color: var(--rating); }
+.vl-rating__stars svg { width: 1em; height: 1em; }
+.vl-rating--sm { font-size: 14px; }
+.vl-rating--md { font-size: 18px; }
+.vl-rating--lg { font-size: 22px; }
+.vl-rating__star-bg { color: var(--ink-200); }
+.vl-rating__value { font-family: var(--font-mono); font-weight: var(--fw-semibold); color: var(--text-strong); font-variant-numeric: tabular-nums; }
+.vl-rating__count { color: var(--text-muted); font-size: 0.82em; }

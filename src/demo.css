@@ -1,0 +1,31 @@
+/* Demo page only — not part of the component. Layout mirrors the prototype's
+   home screen: --container-app wide, .neighbors list with 12px gaps. */
+.demo { max-width: var(--container-app); margin: 0 auto; padding: var(--space-6) var(--space-5) var(--space-16); }
+.demo__head { margin-bottom: var(--space-6); }
+.demo__lede { margin-top: var(--space-2); }
+.demo__toggle { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-body); }
+.demo__toggle input { accent-color: var(--brand-primary); width: var(--space-4); height: var(--space-4); }
+.demo__section { margin-top: var(--space-8); }
+.demo__title { font-size: var(--text-md); }
+.demo__title small { display: block; margin-top: var(--space-1); font-family: var(--font-sans); font-weight: var(--fw-regular); font-size: var(--text-sm); color: var(--text-muted); letter-spacing: var(--ls-normal); }
+.demo__list { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.demo__ref { margin-top: var(--space-4); border: var(--space-0) solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-card); }
+.demo__ref img { display: block; width: 100%; height: auto; }
+.demo__note { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--text-muted); }
+.demo__note code { font-family: var(--font-mono); font-size: var(--text-xs); }
+
+/* "Nearest token" preview: swaps the unresolved values for their nearest
+   system value so the design decision can be made with eyes on it. These are
+   candidates, not the answer — see docs/unresolved-questions.md. */
+.demo--strict .vl-provider {
+  --pc-padding: var(--space-4);
+  --pc-name-size: var(--text-lg);
+  --pc-service-size: var(--text-sm);
+  --pc-service-lh: var(--lh-normal);
+  --pc-service-top: var(--space-1);
+  --pc-meta-top: var(--space-2);
+  --pc-meta-gap: var(--space-3);
+  --pc-dist-padding: var(--space-1) var(--space-2);
+  --pc-dist-border: var(--space-0);
+  --pc-dist-bg: var(--brand-primary-tint);
+}

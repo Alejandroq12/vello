@@ -1,0 +1,13 @@
+/* Visually-hidden text for screen readers. Not a design value — the DS ships
+   no utility for this, so it lives beside the components that need it. */
+.vl-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

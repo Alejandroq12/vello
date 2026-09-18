@@ -1,0 +1,188 @@
+/* ============================================================
+   Vello ProviderCard — card chrome and layout.
+
+   Value provenance (checked 2026-09-18):
+     [DS]     vello-design-system.vercel.app/_ds_bundle.js
+              → components/cards/ProviderCard.jsx (PROVIDER_CSS)
+              → components/cards/Card.jsx (.vl-card__tap — the tappable chevron)
+              → components/buttons/IconButton.jsx (:focus-visible pattern)
+     [TOKEN]  vello-design-system.vercel.app/tokens/*.css
+              (vendored verbatim in src/vello-ds/tokens)
+     [SCREEN] vello-product.vercel.app/flow.css → .nb, .nb__* — the
+              NeighborCard that produced the handed-off screenshot.
+
+   Rule: every px literal in this file lives inside the UNRESOLVED block,
+   one custom property each, so it can be grepped, tested
+   (ProviderCard.test.tsx) and swapped without touching a rule. Every
+   other declaration references a token or a DS component value.
+   ============================================================ */
+
+.vl-provider {
+  /* ---------------- BEGIN UNRESOLVED ----------------
+     Observed on the screen but on no token scale. Rendered as observed:
+     snapping is a design decision, not an engineering one.
+     Format — observed · source · nearest system value. */
+  --pc-padding: 15px;                 /* SCREEN .nb 15px · DS ProviderCard 16px = --space-4 */
+  --pc-gap: 14px;                     /* SCREEN .nb 14px = DS ProviderCard 14px · no token (--space-3 12 / --space-4 16) */
+  --pc-name-size: 17px;               /* SCREEN .nb__name 17px · DS ProviderCard --text-lg 20px · ramp 16 / 18 / 20 */
+  --pc-service-size: 13.5px;          /* SCREEN .nb__bio 13.5px · DS ProviderCard --text-sm 14px */
+  --pc-service-lh: 1.4;               /* SCREEN .nb__bio 1.4 · --lh-normal 1.45 */
+  --pc-service-top: 3px;              /* SCREEN .nb__bio margin-top 3px · --space-1 4px */
+  --pc-meta-top: 9px;                 /* SCREEN .nb__meta margin-top 9px · --space-2 8px (DS ProviderCard 6px, also off-rhythm) */
+  --pc-meta-gap: 10px;                /* SCREEN .nb__meta gap 10px · --space-2 8px / --space-3 12px (DS ProviderCard 12px) */
+  --pc-dist-padding: 3px 9px 3px 7px; /* SCREEN .nb__walk · DS Badge sm 4px 9px */
+  --pc-dist-border: 1px solid var(--green-200); /* SCREEN .nb__walk · DS has no bordered badge variant */
+  --pc-dist-bg: var(--green-50);      /* SCREEN .nb__walk · primitive, no semantic alias · DS Badge brand uses --brand-primary-tint */
+  --pc-dist-icon: 13px;               /* SCREEN .nb__walk svg = DS .vl-provider__dist svg 13px · no token */
+  --pc-top-clear: 34px;               /* SCREEN .nb__top padding-right 34px = tap 26px + --space-2 */
+
+  /* DS component values with no token behind them — upstream hardcodes,
+     reproduced verbatim so the chrome matches the system exactly. */
+  --pc-border-w: 1.5px;               /* DS ProviderCard / Card border */
+  --pc-hover-lift: -2px;              /* DS ProviderCard :hover translateY */
+  --pc-tap-size: 26px;                /* DS Card .vl-card__tap */
+  --pc-tap-inset: 14px;               /* DS Card .vl-card__tap top/right (card padding is 15px — 1px off) */
+  --pc-tap-icon: 15px;                /* DS Card .vl-card__tap svg */
+  --pc-tap-stroke: 2.4;               /* DS Card .vl-card__tap svg stroke-width */
+  --pc-tap-nudge: 1px;                /* DS Card :hover .vl-card__tap translateX */
+
+  /* Not a design value: a transparent outline that only becomes visible in
+     forced-colors mode, where box-shadow focus rings are dropped. */
+  --pc-forced-outline: 2px;
+  /* ---------------- END UNRESOLVED ---------------- */
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pc-gap);
+  width: 100%;
+  padding: var(--pc-padding);
+  background: var(--surface-card);
+  border: var(--pc-border-w) solid var(--border-default);
+  border-radius: var(--radius-lg);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    transform var(--dur-base) var(--ease-standard),
+    box-shadow var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard);
+}
+/* base.css underlines every link on hover; the card is a surface, not inline text. */
+a.vl-provider:hover { text-decoration: none; }
+
+.vl-provider--interactive { cursor: pointer; }
+.vl-provider--interactive:hover {
+  transform: translateY(var(--pc-hover-lift));
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+.vl-provider--featured { box-shadow: var(--shadow-brand); border-color: transparent; }
+
+/* Focus: the DS pattern (Button, IconButton) — outline off, --focus-ring as box-shadow. */
+.vl-provider--interactive:focus-visible {
+  outline: var(--pc-forced-outline) solid transparent;
+  outline-offset: var(--pc-forced-outline);
+  box-shadow: var(--focus-ring);
+}
+.vl-provider--interactive.vl-provider--featured:focus-visible {
+  box-shadow: var(--focus-ring), var(--shadow-brand);
+}
+
+.vl-provider__body { flex: 1; min-width: 0; }
+
+.vl-provider__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);                /* SCREEN 8px */
+  padding-right: var(--pc-top-clear);
+}
+.vl-provider__name {
+  margin: 0;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--pc-name-size);
+  line-height: var(--lh-snug);        /* SCREEN sets none (UA normal); DS heading value */
+  letter-spacing: var(--ls-snug);     /* SCREEN -0.01em */
+  color: var(--text-strong);
+}
+.vl-provider__service {
+  margin: var(--pc-service-top) 0 0;
+  font-size: var(--pc-service-size);
+  line-height: var(--pc-service-lh);
+  color: var(--text-body);            /* SCREEN --text-body · DS ProviderCard --text-muted */
+}
+.vl-provider__price {
+  margin: var(--space-2) 0 0;         /* SCREEN 8px */
+  font-family: var(--font-mono);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-sm);          /* SCREEN 14px */
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums; /* DS: "price and rating use tabular numerals" */
+}
+.vl-provider__unit {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);      /* SCREEN 500 */
+  font-size: var(--text-xs);          /* SCREEN 12px */
+  color: var(--text-muted);
+}
+
+.vl-provider__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--pc-meta-gap);
+  margin-top: var(--pc-meta-top);
+  flex-wrap: nowrap;
+}
+.vl-provider__meta .vl-rating { flex: none; white-space: nowrap; }
+
+.vl-provider__dist {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);                /* SCREEN 4px */
+  flex: none;
+  padding: var(--pc-dist-padding);
+  background: var(--pc-dist-bg);
+  border: var(--pc-dist-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-weight: var(--fw-semibold);    /* SCREEN 600 */
+  font-size: var(--text-xs);          /* SCREEN 12px */
+  color: var(--text-brand);           /* SCREEN --green-700, which --text-brand aliases */
+  white-space: nowrap;
+}
+.vl-provider__dist svg { width: var(--pc-dist-icon); height: var(--pc-dist-icon); flex: none; }
+
+/* Tappable affordance — DS Card .vl-card__tap, decorative; the whole card is the link. */
+.vl-provider__tap {
+  position: absolute;
+  top: var(--pc-tap-inset);
+  right: var(--pc-tap-inset);
+  z-index: var(--z-base);
+  display: grid;
+  place-items: center;
+  width: var(--pc-tap-size);
+  height: var(--pc-tap-size);
+  border-radius: var(--radius-pill);
+  color: var(--text-subtle);
+  background: var(--surface-sunken);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-standard);
+}
+.vl-provider__tap svg { width: var(--pc-tap-icon); height: var(--pc-tap-icon); stroke-width: var(--pc-tap-stroke); }
+.vl-provider--interactive:hover .vl-provider__tap {
+  color: var(--text-brand);
+  background: var(--brand-primary-tint);
+  transform: translateX(var(--pc-tap-nudge));
+}
+
+/* Not a design value: WCAG 2.3.3 — motion is a preference, not a requirement. */
+@media (prefers-reduced-motion: reduce) {
+  .vl-provider,
+  .vl-provider__tap { transition: none; }
+  .vl-provider--interactive:hover,
+  .vl-provider--interactive:hover .vl-provider__tap { transform: none; }
+}
