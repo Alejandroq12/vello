@@ -16,6 +16,7 @@ Card surface, border, radius, hover/featured shadows, motion, name (display font
 | Available badge drawn by hand, orange (accent) | Design system `<Badge variant="brand" size="sm" dot>` — what the design system's ProviderCard specifies. Green now. |
 | Off-scale values: padding 15px, name 17px, service 13.5px, spacing 3/9/10px, chip padding/border/tint | Kept as drawn, each declared once as `--pc-*` in the `UNRESOLVED` block of `ProviderCard.css`. Not snapped — that is a design decision. |
 | The design system's own hardcodes (14px gap, 1.5px border, 26px chevron, 64px avatar) | Kept verbatim, labelled `DS` in the stylesheet. |
+| `flex-wrap: nowrap` on the name row and the meta row. The prototype only ever renders at `--container-app` (430px); neither it nor the design system has a media query. Below ~390px the rating clips past the card edge and the name breaks mid-name beside the Available badge. | Both rows wrap, and name/service get `overflow-wrap: anywhere`. No breakpoint: the card adapts to its container, so it is correct in a list, a sheet or a sidebar. At 430px the render is identical to the screen. Checked at 320 / 360 / 390 / 430. |
 
 A test fails on any hex colour or px literal outside the `UNRESOLVED` block.
 

@@ -93,13 +93,16 @@ a.vl-provider:hover { text-decoration: none; }
 
 .vl-provider__top {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2);                /* SCREEN 8px */
   padding-right: var(--pc-top-clear);
 }
 .vl-provider__name {
+  flex: 1 1 auto;
   margin: 0;
   min-width: 0;
+  overflow-wrap: anywhere;
   font-family: var(--font-display);
   font-weight: var(--fw-bold);
   font-size: var(--pc-name-size);
@@ -111,6 +114,7 @@ a.vl-provider:hover { text-decoration: none; }
   margin: var(--pc-service-top) 0 0;
   font-size: var(--pc-service-size);
   line-height: var(--pc-service-lh);
+  overflow-wrap: anywhere;
   color: var(--text-body);            /* SCREEN --text-body · DS ProviderCard --text-muted */
 }
 .vl-provider__price {
@@ -133,7 +137,7 @@ a.vl-provider:hover { text-decoration: none; }
   align-items: center;
   gap: var(--pc-meta-gap);
   margin-top: var(--pc-meta-top);
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 .vl-provider__meta .vl-rating { flex: none; white-space: nowrap; }
 
