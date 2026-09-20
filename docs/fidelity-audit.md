@@ -3,7 +3,7 @@
 Component: `src/components/ProviderCard/` · Reference: `public/reference/provider-card-screenshot.png`
 Sources checked: the design system bundle and its five token files, the prototype's `flow-home.jsx`, `flow-shared.jsx` and `flow.css`.
 
-**The screen is not the design system's ProviderCard.** It is the prototype's home-screen card. The design system card reads as a booking row: miles, review count, hourly price, Book button. The prototype card reads as a browse row: walking minutes, "from" price, no button, and tapping anywhere on the card opens the provider. I built the prototype card with the design system's tokens. Whether it becomes an official variant is a design decision. Side-by-side comparison in `unresolved-questions.md`, question 1.
+**The screen is not the design system's ProviderCard.** It is the prototype's home-screen card. The design system card reads as a booking row: miles, review count, hourly price, Book button. The prototype card reads as a browse row: walking minutes, "from" price, no button, and the whole card opens the provider. I built the prototype card with the design system's tokens. Whether it becomes an official variant is a design decision. Side-by-side comparison in `unresolved-questions.md`, question 1.
 
 ## Tokens used correctly
 Every colour, font family, weight, radius, shadow, duration and the focus ring come from `--*` tokens. The sizes that do not are in the table below.
@@ -26,16 +26,17 @@ Not fixed here. Both sides are the design system, so only design can pick one.
 
 | The rule | What happens |
 |---|---|
-| Card: "A clickable card must be a link or button, not a div with onClick." and "Do not place two competing actions inside a tappable card." | The system's own ProviderCard is a div with a hover lift and a Book button inside. The prototype card follows the rule with one button and nothing nested inside it. This build follows it with one link. |
+| Card: "Do not make a card interactive unless the whole surface navigates somewhere." and "A clickable card must be a link or button, not a div with onClick." | The system's own ProviderCard is interactive by default, so it lifts on hover and shows a pointer, but it is a div that navigates nowhere. Only its Book button does anything. The prototype card follows both rules with one button that opens the provider. This build follows them with one link. |
 | Typography: "Do not use display type below 30px." | The system's own ProviderCard sets the name in the display font at 20px. The prototype does it at 17px. |
 | Typography: "Do not set body copy below 14px anywhere in product." | The prototype's service text is 13.5px. This one is on the prototype. It nearly settles question 3: the system already said 14. |
+| Card, accessibility note: "The chevron is decorative." Tappable cards pattern: the chevron and the hover lift are what tell the user a card can be opened. | On a phone there is no hover, so the chevron is the only sign that the card does anything. It is `--text-subtle` on `--surface-sunken`, 2.82:1. Interface indicators need 3:1 (rule 1.4.11). Calling it decorative is how it escapes the rule, but then the card has no action signal that passes. Left as the system draws it. Question 11. |
 
 ## Accessibility found and fixed
 Rule numbers come from the Web Content Accessibility Guidelines, the standard used to check accessibility. Level AA is the level most products are held to.
 
 | Issue | Rule | Fix |
 |---|---|---|
-| The prototype's card is a button, but tapping it moves to another screen. | 4.1.2 Name, Role, Value | A link. An article when there is nowhere to go. |
+| The prototype's card is a button, but it opens another screen. | 4.1.2 Name, Role, Value | A link. An article when there is nowhere to go. |
 | Focus shows the browser's default ring, not the system's. | 2.4.7 Focus Visible | `--focus-ring` on keyboard focus. |
 | Available text is 4.10:1. Level AA needs 4.5:1. | 1.4.3 Contrast | See the badge row above. |
 | The photo's alt text repeats the name shown next to it. | 1.1.1 Non-text Content | Empty alt. The name is already there. |
@@ -46,7 +47,7 @@ Rule numbers come from the Web Content Accessibility Guidelines, the standard us
 The component also runs through axe, an automated accessibility checker, as part of the tests. It reports no problems. axe cannot measure colour contrast inside the test runner, so I computed contrast by hand from the token values: all text is 5:1 or better. Stars and chevron are decorative and hidden from screen readers.
 
 ## Unresolved
-Ten questions for design in `unresolved-questions.md`. The values sit in `ProviderCard.css` between `BEGIN UNRESOLVED` and `END UNRESOLVED`.
+Eleven questions for design in `unresolved-questions.md`. The values sit in `ProviderCard.css` between `BEGIN UNRESOLVED` and `END UNRESOLVED`.
 
 ## Verification
 `npm run verify` runs lint, typecheck, 18 tests and the build. All pass. Rendered and checked in Chrome at 320, 360, 390 and 430px.

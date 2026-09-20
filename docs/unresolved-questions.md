@@ -25,3 +25,4 @@ Not answerable from the Vello references. Each one is a quick pick.
 8. **Review count:** show "(213)" on the home screen? → **yes / no**
 9. **Featured card:** where does the "promoted" label go? → **above card / inside card / none**
 10. **"Available":** means now, today, or this week? → **now / today / week**
+11. **Call to action:** how does a user know the card can be opened? Today the only hint is the small grey chevron, and it is too faint: 2.82:1, when the minimum for an interface hint is 3:1. The design system does allow a Book button here (its pattern "Card navigates, one action escapes" shows exactly that), but on the home screen it would put booking before trust, which the brief and the interviews argue against. That makes it a product decision, not a visual one. → **darker chevron (`--text-muted`, 4.32:1) / add a "View profile" label / both / keep as is**

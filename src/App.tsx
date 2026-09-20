@@ -98,6 +98,19 @@ export function App() {
         <p className="demo__note">
           Cards 1–3 are links to provider details. Card 4 has no destination.
         </p>
+        <p className="demo__flag" role="note">
+          Note for design review: the only hint that a card can be opened is the small grey chevron,
+          and it is too faint to pass the contrast minimum (2.82:1, needs 3:1). It follows the design
+          system, so I left it. See question 11 in{' '}
+          <a
+            href="https://github.com/Alejandroq12/vello/blob/main/docs/unresolved-questions.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            the unresolved questions
+          </a>
+          .
+        </p>
       </section>
 
       <section className="demo__section" aria-labelledby="two-cards">

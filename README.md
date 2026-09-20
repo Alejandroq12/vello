@@ -31,7 +31,7 @@ Runs lint, typecheck, tests and build. It should end with `built in` and no erro
 - The Available badge is green, not coral. The coral fails WCAG AA contrast (4.10:1, minimum 4.5:1). Green is the design system's brand variant at 5.70:1. A darker coral text also passes (13.97:1) and is documented in the audit if you prefer coral.
 - Values that sit on no token (15px padding, 17px name, 13.5px service text) are kept exactly as drawn. They are not rounded to the nearest token. That call is yours. The demo has a checkbox that previews the nearest-token version.
 - The card wraps its rows on narrow screens. Nothing clips down to 320px. At 430px it matches the screen.
-- The whole card is one link. Tapping anywhere opens the provider.
+- The whole card is one link. Any part of it opens the provider.
 
 ## Where things are
 
